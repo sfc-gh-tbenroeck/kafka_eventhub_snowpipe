@@ -2,11 +2,11 @@
 
 ## Overview
 
-This repository contains the source code and configuration necessary to run Kafka Connect, facilitating the connection between Azure Event Hubs and Snowflake using the (Snowpipe Streaming)[https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-kafka]. It leverages an Azure Managed Service Identity (MSI) for authentication to Event Hubs and dynamically generates configuration files using `envsubst`.
+This repository contains the source code and configuration necessary to run Kafka Connect, facilitating the connection between Azure Event Hubs and Snowflake using the [Snowpipe Streaming](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-kafka). It leverages an Azure Managed Service Identity (MSI) for authentication to Event Hubs and dynamically generates configuration files using `envsubst`.
 
 ### Azure Event Hubs
 
-To connect to Azure Event Hubs using an MSI a CustomAuthenticateCallbackHandler class is required.  This repo includes `azure_msi_oauth-1.0-SNAPSHOT.jar` which I compiled using the code from (Azure Event Hubs for Kafka)[https://github.com/Azure/azure-event-hubs-for-kafka] GitHub repository.
+To connect to Azure Event Hubs using an MSI a CustomAuthenticateCallbackHandler class is required.  This repo includes `azure_msi_oauth-1.0-SNAPSHOT.jar` which I compiled using the code from [Azure Event Hubs for Kafka](https://github.com/Azure/azure-event-hubs-for-kafka) GitHub repository.
 
 ### Snowflake Setup
 
@@ -17,7 +17,7 @@ To connect to Azure Event Hubs using an MSI a CustomAuthenticateCallbackHandler 
 CREATE ROLE kafka_connector_role;
 
 -- Grant privileges on the database
-GRANT USAGE ON DATABASE GM TO ROLE kafka_connector_role;
+GRANT USAGE ON DATABASE STREAMINGDB TO ROLE kafka_connector_role;
 
 -- Grant privileges on the schema
 GRANT USAGE ON SCHEMA PUBLIC TO ROLE kafka_connector_role;
