@@ -1,0 +1,40 @@
+# connect internal topic names, automatically created by Kafka Connect with AdminClient API if not exists
+config.storage.topic=connect-cluster-configs
+offset.storage.topic=connect-cluster-offsets
+status.storage.topic=connect-cluster-status
+
+# converter settings
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+internal.key.converter=org.apache.kafka.connect.json.JsonConverter
+internal.value.converter=org.apache.kafka.connect.json.JsonConverter
+internal.key.converter.schemas.enable=false
+internal.value.converter.schemas.enable=false
+
+offset.storage.file.filename=/tmp/connect.offsets
+plugin.path=/opt/kafka/libs
+
+# azure event hub
+bootstrap.servers=${eventhub_namespace}
+group.id=connect-cluster-group
+
+# required EH Kafka security settings
+# TODO debug and fix the need for having the settings repeated
+ssl.endpoint.identification.algorithm=https
+security.protocol=SASL_SSL
+sasl.mechanism=OAUTHBEARER
+sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
+sasl.login.callback.handler.class=CustomAuthenticateCallbackHandler
+
+consumer.ssl.endpoint.identification.algorithm=https
+consumer.security.protocol=SASL_SSL
+consumer.sasl.mechanism=OAUTHBEARER
+consumer.sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
+consumer.sasl.login.callback.handler.class=CustomAuthenticateCallbackHandler
+
+producer.ssl.endpoint.identification.algorithm=https
+producer.security.protocol=SASL_SSL
+producer.sasl.mechanism=OAUTHBEARER
+producer.sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
+producer.sasl.login.callback.handler.class=CustomAuthenticateCallbackHandler
+#########################################################################################################

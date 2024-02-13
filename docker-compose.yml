@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  sf-kafka-connect:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      CONNECT_REST_ADVERTISED_HOST_NAME: "connect"
+      CONNECT_REST_PORT: "8083"
+      eventhub_namespace: "snowflaketestevnthub.servicebus.windows.net:9093"
+      eventhub_name: "snowpipe"
+      snowflake_topic2table_map: "snowpipe:teststreaming"
+      snowflake_url_name: "wp000000.west-us-2.azure.snowflakecomputing.com:443"
+      snowflake_user_name: "streaming_user"
+      snowflake_private_key: "MIIEvQIBADANBgk__HIDDEN_8dE="
+      snowflake_database_name: "streamingdb"
+      snowflake_schema_name: "public"
+      snowflake_role_name: "kafka_connector_role"
